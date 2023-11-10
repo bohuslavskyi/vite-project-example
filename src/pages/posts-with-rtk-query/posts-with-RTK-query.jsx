@@ -1,5 +1,4 @@
 import { useGetPostsQuery } from '../../app/services/postsApi/postsApi.js'
-import { Typography } from 'antd'
 
 import Loading from '../../widgets/loading/loading.jsx'
 import PostCard from '../../components/postCard/postCard.jsx'
@@ -9,14 +8,12 @@ const PostsRTKQuery = () => {
     const { data = {}, isLoading } = useGetPostsQuery()
     const { posts = [] } = data
 
-    const { Text } = Typography
-
     if (isLoading) return <Loading fontSize="60px" />
 
     return (
         <div className={c.postCardsWrap}>
             {posts?.map((post) => (
-                <PostCard title={post.title} body={post.body} />
+                <PostCard key={post.id} title={post.title} body={post.body} />
             ))}
         </div>
     )

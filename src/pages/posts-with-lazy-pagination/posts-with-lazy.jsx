@@ -1,15 +1,13 @@
 import { useCallback, useContext, useRef, useState } from 'react'
-import { Avatar, Card, Col, Row, Space, Typography } from 'antd'
+import { Space } from 'antd'
 
 import { LayoutContext } from '../../components/layout/layout.jsx'
 import Loading from '../../widgets/loading/loading.jsx'
 import { useScroll } from '../../hooks/useScroll.js'
 import SearchInput from '../../components/input/searchInput.jsx'
-import PostCard from "../../components/postCard/postCard.jsx";
+import PostCard from '../../components/postCard/postCard.jsx'
 
-import c from "./post-with-lazy.module.scss"
-
-const { Meta } = Card
+import c from './post-with-lazy.module.scss'
 
 const PostsLazyPagination = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -23,8 +21,6 @@ const PostsLazyPagination = () => {
 
     const observableRef = useRef(null)
     const scrollRef = useContext(LayoutContext)
-
-    const { Text } = Typography
 
     const getPosts = useCallback(() => {
         if (!isDataAll || isLoading || (total && posts.length === total)) return
@@ -89,7 +85,11 @@ const PostsLazyPagination = () => {
 
                 <div className={c.postCardsWrap}>
                     {posts?.map((post) => (
-                        <PostCard title={post.title} body={post.body} />
+                        <PostCard
+                            key={post.id}
+                            title={post.title}
+                            body={post.body}
+                        />
                     ))}
                 </div>
             </Space>
