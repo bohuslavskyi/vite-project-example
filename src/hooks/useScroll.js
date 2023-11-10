@@ -22,8 +22,8 @@ export const useScroll = (parentRef, childrenRef, callback) => {
         observer.current.observe(childrenRef.current);
 
         return (() => {
-            observer.current.unobserve(childrenRef.current);
+            if (childrenRef.current) observer.current.unobserve(childrenRef.current);
         })
-    }, [callback])
+    }, [callback, childrenRef])
 
 }

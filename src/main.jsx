@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ReactDOM from 'react-dom/client'
 import { Provider } from "react-redux";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
@@ -9,14 +9,18 @@ import {store} from "./app/store.js";
 import {antdTheme} from "./antdTheme.js";
 import AppLayout from "./components/layout/layout.jsx";
 import Home from './pages/home/home.jsx'
-import PostsRTKQuery from './pages/posts-with-rtk-query/posts.jsx'
-import PostsLazyPagination from './pages/posts-with-lazy-pagination/posts.jsx'
+import PostsRTKQuery from './pages/posts-with-rtk-query/posts-with-RTK-query.jsx'
+import PostsLazyPagination from './pages/posts-with-lazy-pagination/posts-with-lazy.jsx'
 
 import './index.scss'
 
 const App = () => {
-    const [themeAlgorithm, setAlgorithm] = useState('darkAlgorithm');
+    const [themeAlgorithm, setAlgorithm] = useState(localStorage.getItem("themeAlgorithm"));
     const algorithm = theme[themeAlgorithm];
+
+    useEffect(() => {
+        localStorage.setItem("themeAlgorithm", themeAlgorithm);
+    }, [themeAlgorithm])
 
     const router = createBrowserRouter([
         {

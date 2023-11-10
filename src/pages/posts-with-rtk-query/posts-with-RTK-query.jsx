@@ -2,6 +2,8 @@ import { useGetPostsQuery } from '../../app/services/postsApi/postsApi.js'
 import { Typography } from 'antd'
 
 import Loading from '../../widgets/loading/loading.jsx'
+import PostCard from '../../components/postCard/postCard.jsx'
+import c from '../posts-with-lazy-pagination/post-with-lazy.module.scss'
 
 const PostsRTKQuery = () => {
     const { data = {}, isLoading } = useGetPostsQuery()
@@ -11,16 +13,13 @@ const PostsRTKQuery = () => {
 
     if (isLoading) return <Loading fontSize="60px" />
 
-    return posts?.map((post) => (
-        <div key={post.id}>
-            <h2>
-                <Text>{post.title}</Text>
-            </h2>
-            <p>
-                <Text>{post.body}</Text>
-            </p>
+    return (
+        <div className={c.postCardsWrap}>
+            {posts?.map((post) => (
+                <PostCard title={post.title} body={post.body} />
+            ))}
         </div>
-    ))
+    )
 }
 
 export default PostsRTKQuery

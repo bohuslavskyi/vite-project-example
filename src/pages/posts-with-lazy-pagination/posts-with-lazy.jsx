@@ -1,10 +1,15 @@
 import { useCallback, useContext, useRef, useState } from 'react'
-import { Typography } from 'antd'
+import { Avatar, Card, Col, Row, Space, Typography } from 'antd'
 
 import { LayoutContext } from '../../components/layout/layout.jsx'
 import Loading from '../../widgets/loading/loading.jsx'
 import { useScroll } from '../../hooks/useScroll.js'
 import SearchInput from '../../components/input/searchInput.jsx'
+import PostCard from "../../components/postCard/postCard.jsx";
+
+import c from "./post-with-lazy.module.scss"
+
+const { Meta } = Card
 
 const PostsLazyPagination = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -64,27 +69,30 @@ const PostsLazyPagination = () => {
     return (
         <>
             <br />
+            <Space
+                direction="vertical"
+                size="middle"
+                style={{
+                    display: 'flex',
+                }}
+            >
+                <br />
+                <SearchInput
+                    loading={isLoading}
+                    debounceDelay={400}
+                    placeholder="Search"
+                    allowClear={true}
+                    onChange={search}
+                    searchValue={searchValue}
+                    setSearchValue={setSearchValue}
+                />
 
-            <SearchInput
-                loading={isLoading}
-                debounceDelay={400}
-                placeholder="Search"
-                allowClear={true}
-                onChange={search}
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-            />
-
-            {posts?.map((post) => (
-                <div key={post.id}>
-                    <h2>
-                        <Text>{post.title}</Text>
-                    </h2>
-                    <p>
-                        <Text>{post.body}</Text>
-                    </p>
+                <div className={c.postCardsWrap}>
+                    {posts?.map((post) => (
+                        <PostCard title={post.title} body={post.body} />
+                    ))}
                 </div>
-            ))}
+            </Space>
 
             <div ref={observableRef} style={{ height: 50 }}>
                 {isLoading && <Loading fontSize="20px" />}
