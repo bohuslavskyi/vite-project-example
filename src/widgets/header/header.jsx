@@ -1,12 +1,13 @@
-import { Col, Row, Space, Layout } from "antd";
-import { NavLink } from "react-router-dom";
+import { Col, Row, Space, Layout, Button, Typography } from 'antd'
+import { NavLink } from 'react-router-dom'
 
-import { Paths } from "../../paths.js";
+import NavigationList from './constants/navList.js'
 
 import c from './header.module.scss'
 
-const Header = () => {
-    const { Header } = Layout;
+const Header = ({ children }) => {
+    const { Header } = Layout
+    const { Text } = Typography
 
     return (
         <Header className={c.header}>
@@ -15,20 +16,17 @@ const Header = () => {
                 <Col span={16}>
                     <Space className={c.headerWrap}>
                         <Space className={c.fontWhite}>
-                                <>
-                                    <Col>
-                                        <NavLink to={Paths.home}>
-                                            <button type="button" > Home </button>
-                                        </NavLink>
-                                    </Col>
-
-                                    <Col>
-                                        <NavLink to={Paths.posts}>
-                                            <button type="button"> Posts </button>
-                                        </NavLink>
-                                    </Col>
-                                </>
+                            {NavigationList.map((navButton) => (
+                                <Col key={navButton.id}>
+                                    <NavLink to={navButton.linkTo}>
+                                        <Button>
+                                            <Text>{navButton.title}</Text>
+                                        </Button>
+                                    </NavLink>
+                                </Col>
+                            ))}
                         </Space>
+                        <Space>{children}</Space>
                     </Space>
                 </Col>
                 <Col span={4} />

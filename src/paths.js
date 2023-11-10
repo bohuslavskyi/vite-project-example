@@ -1,4 +1,5 @@
 export const Paths = {
     home: '/',
-    posts: '/posts',
+    postsRTKQuery: '/posts-with-rtk-query',
+    postsLazyPagination: '/posts-with-lazy-pagination',
 };
