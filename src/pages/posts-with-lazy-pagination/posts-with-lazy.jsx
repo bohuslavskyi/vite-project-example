@@ -1,11 +1,11 @@
-import { useCallback, useContext, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Space } from 'antd'
 
-import { LayoutContext } from '../../components/layout/layout.jsx'
 import Loading from '../../widgets/loading/loading.jsx'
 import { useScroll } from '../../hooks/useScroll.js'
-import SearchInput from '../../components/input/searchInput.jsx'
-import PostCard from '../../components/postCard/postCard.jsx'
+import SearchInput from '../../widgets/input/search-input.jsx'
+import PostCard from '../../components/post-card/postCard.jsx'
+import CustomGridLayout from '../../widgets/custom-grid-layout/custom-grid-layout.jsx'
 
 import c from './post-with-lazy.module.scss'
 
@@ -19,8 +19,8 @@ const PostsLazyPagination = () => {
     const isDataAll = !dataSearch.posts
     const { posts = [], total } = isDataAll ? data : dataSearch
 
+    const scrollRef = useRef(null)
     const observableRef = useRef(null)
-    const scrollRef = useContext(LayoutContext)
 
     const getPosts = useCallback(() => {
         if (!isDataAll || isLoading || (total && posts.length === total)) return
@@ -55,7 +55,7 @@ const PostsLazyPagination = () => {
 
     const intersected = useScroll(scrollRef, observableRef, getPosts)
 
-    if (isLoading && !posts.length)
+        if (isLoading && !posts.length)
         return (
             <div ref={observableRef}>
                 {isLoading && <Loading fontSize="60px" />}
@@ -63,41 +63,46 @@ const PostsLazyPagination = () => {
         )
 
     return (
-        <>
-            <br />
-            <Space
-                direction="vertical"
-                size="middle"
-                style={{
-                    display: 'flex',
-                }}
-            >
+        <div className={c.postsLazyPaginationWrap} ref={scrollRef}>
+            <CustomGridLayout>
                 <br />
-                <SearchInput
-                    loading={isLoading}
-                    debounceDelay={400}
-                    placeholder="Search"
-                    allowClear={true}
-                    onChange={search}
-                    searchValue={searchValue}
-                    setSearchValue={setSearchValue}
-                />
+                <Space
+                    direction="vertical"
+                    size="middle"
+                    style={{
+                        display: 'flex',
+                    }}
+                >
+                    <br />
+                    <SearchInput
+                        loading={isLoading}
+                        debounceDelay={400}
+                        placeholder="Search"
+                        allowClear={true}
+                        onChange={search}
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
+                    />
 
-                <div className={c.postCardsWrap}>
-                    {posts?.map((post) => (
-                        <PostCard
-                            key={post.id}
-                            title={post.title}
-                            body={post.body}
-                        />
-                    ))}
+                    <div className={c.postCardsWrap}>
+                        {posts?.map((post) => (
+                            <PostCard
+                                key={post.id}
+                                title={post.title}
+                                body={post.body}
+                            />
+                        ))}
+                    </div>
+                </Space>
+
+                <div
+                    ref={observableRef}
+                    style={{ height: 50 }}
+                >
+                    {isLoading && <Loading fontSize="20px" />}
                 </div>
-            </Space>
-
-            <div ref={observableRef} style={{ height: 50 }}>
-                {isLoading && <Loading fontSize="20px" />}
-            </div>
-        </>
+            </CustomGridLayout>
+        </div>
     )
 }
 

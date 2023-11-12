@@ -4,20 +4,20 @@ export const postsApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getPosts: builder.query({
         query: () => ({
-            url: "/",
+            url: "/posts",
             method: "GET",
         }),
     }),
         addPost: builder.mutation({
         query: (postData) => ({
-            url: "/add",
+            url: "/posts/add",
             method: "POST",
             body: postData,
         }),
     }),
         deletePost: builder.query({
         query: (id) => ({
-            url: `/${id}`,
+            url: `/posts/${id}`,
             method: "DELETE",
         }),
         }),

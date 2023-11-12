@@ -16,5 +16,10 @@ const NavigationList = [
         title: 'Posts Lazy',
         linkTo: Paths.postsLazyPagination
     },
+    {
+        id: 4,
+        title: 'Antd Form',
+        linkTo: Paths.antdForm
+    },
 ]
 export default NavigationList

@@ -1,7 +1,7 @@
 import { Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import { useDebounce } from '../../hooks/useDebounce.js'
-import Loading from "../../widgets/loading/loading.jsx";
+import Loading from "../loading/loading.jsx";
 
 const SearchInput = (props) => {
     const {
