@@ -15,13 +15,13 @@ The main goals were to understand Vite's project structure, experiment with Reac
 ### Clone the repository:
 
 ```
-git clone https://github.com/your-username/project-name.git
+git clone https://github.com/bohuslavskyi/pet_project.git
 ```
 
 ### Install dependencies:
 
 ```
-cd project-name
+cd pet_project
 npm install
 ```
 ### Start the development server:
