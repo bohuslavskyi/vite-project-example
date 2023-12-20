@@ -19,8 +19,8 @@ const Header = ({ children }) => {
                             {NavigationList.map((navButton) => (
                                 <Col key={navButton.id}>
                                     <NavLink to={navButton.linkTo}>
-                                        <Button>
-                                            <Text>{navButton.title}</Text>
+                                        <Button type={'text'}>
+                                            {navButton.title}
                                         </Button>
                                     </NavLink>
                                 </Col>

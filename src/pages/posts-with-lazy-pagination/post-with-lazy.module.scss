@@ -4,4 +4,11 @@
   gap: 24px;
   flex-wrap: wrap;
   margin-top: 40px;
+
+  .postsLazyPaginationWrap {
+    height: 100%;
+    max-height: calc(100vh - 64px);
+    overflow: auto;
+    z-index: 10;
+  }
 }

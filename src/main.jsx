@@ -7,10 +7,11 @@ import { ConfigProvider, theme} from "antd";
 import {Paths} from "./paths.js";
 import {store} from "./app/store.js";
 import {antdTheme} from "./antdTheme.js";
-import AppLayout from "./components/layout/layout.jsx";
+import AppLayout from "./widgets/layout/layout.jsx";
 import Home from './pages/home/home.jsx'
 import PostsRTKQuery from './pages/posts-with-rtk-query/posts-with-RTK-query.jsx'
 import PostsLazyPagination from './pages/posts-with-lazy-pagination/posts-with-lazy.jsx'
+import Dashboard from "./pages/dashboard/dashboard.jsx";
 
 import './index.scss'
 
@@ -31,6 +32,7 @@ const App = () => {
                 { index: true, element: <Home /> },
                 { path: Paths.postsRTKQuery, element: <PostsRTKQuery /> },
                 { path: Paths.postsLazyPagination, element: <PostsLazyPagination /> },
+                { path: Paths.antdForm, element: <Dashboard /> },
             ],
         },
     ]);
