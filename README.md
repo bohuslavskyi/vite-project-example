@@ -10,9 +10,6 @@ This project was created for educational purposes to explore and practice using:
 The main goals were to understand Vite's project structure, experiment with React Router Dom v6 features, and implement state management with Redux Toolkit. Additionally, custom theming with Ant Design was explored, and a switcher based on the custom theme was implemented.
 
 
-### Technologies Used
-
-
 ## Getting Started
 
 ### Clone the repository:
